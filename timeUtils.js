@@ -11,6 +11,7 @@ class ISOTimeUtils {
     getTimeOffsetSuffix() {
         const offset = this.#now.getTimezoneOffset();
         const sign = offset <= 0 ? "+" : "-";
+
         const pad = (num) => String(num).padStart(2, "0");
         const hours = pad(Math.floor(Math.abs(offset) / 60));
         const minutes = pad(Math.abs(offset) % 60);
@@ -23,7 +24,13 @@ class ISOTimeUtils {
      * @returns UTC 时间字符串
      */
     getUTCDatetime() {
-        return this.#now.toISOString();
+        const year = this.#now.getUTCFullYear();
+        const month = this.#now.getUTCMonth() + 1;
+        const day = this.#now.getUTCDate();
+        const hours = this.#now.getUTCHours();
+        const minutes = this.#now.getUTCMinutes();
+        const seconds = this.#now.getUTCSeconds();
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
     }
 
     /**
@@ -31,9 +38,14 @@ class ISOTimeUtils {
      * @returns 本地时区时间字符串
      */
     getLocalDatetime() {
-        const utcString = this.getUTCDatetime();
-        const utcWithoutTimeZone = utcString.substring(0, utcString.length - 1);
-        return `${utcWithoutTimeZone}${this.getTimeOffsetSuffix()}`;
+        const suffix = this.getTimeOffsetSuffix();
+        const year = this.#now.getFullYear();
+        const month = this.#now.getMonth() + 1;
+        const day = this.#now.getDate();
+        const hours = this.#now.getHours();
+        const minutes = this.#now.getMinutes();
+        const seconds = this.#now.getSeconds();
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${suffix}`;
     }
 
     /**
