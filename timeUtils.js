@@ -1,5 +1,3 @@
-
-
 class ISOTimeUtils {
     #now;
     constructor() {
@@ -12,12 +10,12 @@ class ISOTimeUtils {
      */
     getTimeOffsetSuffix() {
         const offset = this.#now.getTimezoneOffset();
-        const sign = offset <= 0 ? '+' : '-';
-        const pad = (num) => String(num).padStart(2, '0');
+        const sign = offset <= 0 ? "+" : "-";
+        const pad = (num) => String(num).padStart(2, "0");
         const hours = pad(Math.floor(Math.abs(offset) / 60));
         const minutes = pad(Math.abs(offset) % 60);
         const iso8601Offset = `${sign}${hours}:${minutes}`;
-        return iso8601Offset
+        return iso8601Offset;
     }
 
     /**
@@ -25,7 +23,7 @@ class ISOTimeUtils {
      * @returns UTC 时间字符串
      */
     getUTCDatetime() {
-        return this.#now.toISOString()
+        return this.#now.toISOString();
     }
 
     /**
@@ -35,7 +33,7 @@ class ISOTimeUtils {
     getLocalDatetime() {
         const utcString = this.getUTCDatetime();
         const utcWithoutTimeZone = utcString.substring(0, utcString.length - 1);
-        return `${utcWithoutTimeZone}${this.getTimeOffsetSuffix()}`
+        return `${utcWithoutTimeZone}${this.getTimeOffsetSuffix()}`;
     }
 
     /**
@@ -45,7 +43,7 @@ class ISOTimeUtils {
      */
     pathFriendly(str) {
         const unsafeChars = /[\/\\:*?"<>|]/g;
-        return str.replace(unsafeChars, '_');
+        return str.replace(unsafeChars, "_");
     }
 }
 module.exports = ISOTimeUtils;
