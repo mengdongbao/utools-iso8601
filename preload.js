@@ -17,21 +17,8 @@ window.exports = {
                    }
              ])
           },
-          // 子输入框内容变化时被调用 可选 (未设置则无搜索)
-          search: (action, searchWord, callbackSetList) => {
-             // 获取一些数据
-             // 执行 callbackSetList 显示出来
-             callbackSetList([
-                {
-                   title: '这是标题',
-                   description: '这是描述',
-                   icon:'', // 图标
-                   url: 'https://yuanliao.info'
-                }
-             ])
-          },
           // 用户选择列表中某个条目时被调用
-          select: (action, itemData, callbackSetList) => {  
+          select: (action, itemData, callbackSetList) => {
              window.utools.hideMainWindow()
              const type = itemData.type
             //  utools.copyText(itemData.description)
