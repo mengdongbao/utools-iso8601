@@ -5,7 +5,12 @@
         {
             "code": "time",
             "explain": "获取对路径友好的 ISO 8601 Datetime",
-            "cmds": ["iso", "time", "时间", "日期"]
+            "cmds": [
+                "iso",
+                "time",
+                "时间",
+                "日期"
+            ]
         }
     ]
 }

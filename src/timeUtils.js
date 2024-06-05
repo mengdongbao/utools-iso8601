@@ -10,9 +10,9 @@ class ISOTimeUtils {
      */
     getTimeOffsetSuffix() {
         const offset = this.#now.getTimezoneOffset();
-        const sign = offset <= 0 ? "+" : "-";
+        const sign = offset <= 0 ? '+' : '-';
 
-        const pad = (num) => String(num).padStart(2, "0");
+        const pad = (num) => String(num).padStart(2, '0');
         const hours = pad(Math.floor(Math.abs(offset) / 60));
         const minutes = pad(Math.abs(offset) % 60);
         const iso8601Offset = `${sign}${hours}:${minutes}`;
@@ -34,9 +34,9 @@ class ISOTimeUtils {
      */
     getDatetimeObject(type) {
         let suffix, year, month, day, hours, minutes, seconds;
-        
+
         switch (type) {
-            case "Local":
+            case 'Local':
                 suffix = String(this.getTimeOffsetSuffix());
                 year = String(this.#now.getFullYear()).padStart(2, '0');
                 month = String(this.#now.getMonth() + 1).padStart(2, '0');
@@ -45,7 +45,7 @@ class ISOTimeUtils {
                 minutes = String(this.#now.getMinutes()).padStart(2, '0');
                 seconds = String(this.#now.getSeconds()).padStart(2, '0');
                 break;
-            case "UTC":
+            case 'UTC':
                 year = String(this.#now.getUTCFullYear());
                 month = String(this.#now.getUTCMonth() + 1).padStart(2, '0');
                 day = String(this.#now.getUTCDate()).padStart(2, '0');
@@ -64,7 +64,7 @@ class ISOTimeUtils {
             hours,
             minutes,
             seconds,
-        }
+        };
     }
 
     /**
@@ -72,15 +72,8 @@ class ISOTimeUtils {
      * @returns UTC 时间字符串
      */
     getUTCDatetime() {
-        const {
-            year,
-            month,
-            day,
-            hours,
-            minutes,
-            seconds,
-            suffix,
-        } = this.getDatetimeObject('UTC');
+        const { year, month, day, hours, minutes, seconds, suffix } =
+            this.getDatetimeObject('UTC');
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
     }
 
@@ -89,15 +82,8 @@ class ISOTimeUtils {
      * @returns 本地时区时间字符串
      */
     getLocalDatetime() {
-        const {
-            year,
-            month,
-            day,
-            hours,
-            minutes,
-            seconds,
-            suffix,
-        } = this.getDatetimeObject('Local');
+        const { year, month, day, hours, minutes, seconds, suffix } =
+            this.getDatetimeObject('Local');
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${suffix}`;
     }
 
@@ -108,7 +94,7 @@ class ISOTimeUtils {
      */
     pathFriendly(str) {
         const unsafeChars = /[\/\\:*?"<>|]/g;
-        return str.replace(unsafeChars, "_");
+        return str.replace(unsafeChars, '_');
     }
 }
 module.exports = ISOTimeUtils;
