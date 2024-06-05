@@ -20,16 +20,65 @@ class ISOTimeUtils {
     }
 
     /**
+     * 获取时间对象
+     * @param {"Local" | "UTC"} type 时区类型
+     * @returns {{
+     * suffix: String
+     * year: String
+     * month: String
+     * day: String
+     * hours: String
+     * minutes: String
+     * seconds: String
+     * }} 时间对象
+     */
+    getDatetimeObject(type) {
+        let suffix, year, month, day, hours, minutes, seconds;
+        
+        switch (type) {
+            case "Local":
+                suffix = String(this.getTimeOffsetSuffix());
+                year = String(this.#now.getFullYear()).padStart(2, '0');
+                month = String(this.#now.getMonth() + 1).padStart(2, '0');
+                day = String(this.#now.getDate()).padStart(2, '0');
+                hours = String(this.#now.getHours()).padStart(2, '0');
+                minutes = String(this.#now.getMinutes()).padStart(2, '0');
+                seconds = String(this.#now.getSeconds()).padStart(2, '0');
+            case "UTC":
+                year = String(this.#now.getUTCFullYear());
+                month = String(this.#now.getUTCMonth() + 1).padStart(2, '0');
+                day = String(this.#now.getUTCDate()).padStart(2, '0');
+                hours = String(this.#now.getUTCHours()).padStart(2, '0');
+                minutes = String(this.#now.getUTCMinutes()).padStart(2, '0');
+                seconds = String(this.#now.getUTCSeconds()).padStart(2, '0');
+            default:
+                break;
+        }
+        return {
+            suffix,
+            year,
+            month,
+            day,
+            hours,
+            minutes,
+            seconds,
+        }
+    }
+
+    /**
      * 获取 UTC 时间字符串
      * @returns UTC 时间字符串
      */
     getUTCDatetime() {
-        const year = this.#now.getUTCFullYear();
-        const month = this.#now.getUTCMonth() + 1;
-        const day = this.#now.getUTCDate();
-        const hours = this.#now.getUTCHours();
-        const minutes = this.#now.getUTCMinutes();
-        const seconds = this.#now.getUTCSeconds();
+        const {
+            year,
+            month,
+            day,
+            hours,
+            minutes,
+            seconds,
+            suffix,
+        } = this.getDatetimeObject('UTC');
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
     }
 
@@ -38,13 +87,15 @@ class ISOTimeUtils {
      * @returns 本地时区时间字符串
      */
     getLocalDatetime() {
-        const suffix = this.getTimeOffsetSuffix();
-        const year = this.#now.getFullYear();
-        const month = this.#now.getMonth() + 1;
-        const day = this.#now.getDate();
-        const hours = this.#now.getHours();
-        const minutes = this.#now.getMinutes();
-        const seconds = this.#now.getSeconds();
+        const {
+            year,
+            month,
+            day,
+            hours,
+            minutes,
+            seconds,
+            suffix,
+        } = this.getDatetimeObject('Local');
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${suffix}`;
     }
 
