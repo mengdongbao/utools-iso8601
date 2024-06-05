@@ -1,15 +1,7 @@
-# 🚀 Welcome to your new awesome project!
+# 🚀 欢迎使用 utools-iso8601!
 
-This project has been created using **webpack-cli**, you can now run
-
-```
-npm run build
-```
-
-or
-
-```
-yarn build
-```
-
-to bundle your application
+# 功能
+- 获取 UTC 时间
+- 获取本机时间
+- 获取对路经友好的 UTC 时间
+- 获取对路径友好的本地时间
