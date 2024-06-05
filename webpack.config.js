@@ -26,6 +26,7 @@ const config = {
         new CopyPlugin({
             patterns: [
                 {from: './plugin.json', to: 'plugin.json'},
+                {from: './src/assert', to: 'assert'},
             ]
         })
     ],

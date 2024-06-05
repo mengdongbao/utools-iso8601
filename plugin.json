@@ -1,5 +1,5 @@
 {
-    "logo": "logo.png",
+    "logo": "assert/logo.png",
     "preload": "preload.js",
     "features": [
         {
