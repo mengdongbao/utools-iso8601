@@ -44,6 +44,7 @@ class ISOTimeUtils {
                 hours = String(this.#now.getHours()).padStart(2, '0');
                 minutes = String(this.#now.getMinutes()).padStart(2, '0');
                 seconds = String(this.#now.getSeconds()).padStart(2, '0');
+                break;
             case "UTC":
                 year = String(this.#now.getUTCFullYear());
                 month = String(this.#now.getUTCMonth() + 1).padStart(2, '0');
@@ -51,6 +52,7 @@ class ISOTimeUtils {
                 hours = String(this.#now.getUTCHours()).padStart(2, '0');
                 minutes = String(this.#now.getUTCMinutes()).padStart(2, '0');
                 seconds = String(this.#now.getUTCSeconds()).padStart(2, '0');
+                break;
             default:
                 break;
         }
